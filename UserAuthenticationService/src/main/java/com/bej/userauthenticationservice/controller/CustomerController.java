@@ -3,7 +3,7 @@ package com.bej.userauthenticationservice.controller;
 
 import com.bej.userauthenticationservice.domain.Customer;
 import com.bej.userauthenticationservice.exception.InvalidCredentialsException;
-import com.bej.userauthenticationservice.exception.UserAlreadyExistsException;
+import com.bej.userauthenticationservice.exception.CustomerAlreadyExistsException;
 import com.bej.userauthenticationservice.security.SecurityTokenGenerator;
 
 import com.bej.userauthenticationservice.service.CustomerService;
@@ -24,13 +24,13 @@ public class CustomerController {
         this.securityTokenGenerator = securityTokenGenerator;
     }
     @PostMapping("/user")
-    public ResponseEntity<?> save(@RequestBody Customer user) throws UserAlreadyExistsException {
-        return new ResponseEntity<>(userService.saveUser(user),HttpStatus.CREATED);
+    public ResponseEntity<?> save(@RequestBody Customer user) throws CustomerAlreadyExistsException {
+        return new ResponseEntity<>(userService.saveCustomer(user),HttpStatus.CREATED);
     }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Customer user) throws InvalidCredentialsException
     {
-        Customer retrievedUser = userService.findByEmailAndPassword(user.getCustomerId(),user.getPassword());
+        Customer retrievedUser = userService.findCustomerByCustomerIdAndPassword(user.getCustomerId(),user.getPassword());
         if(retrievedUser==null)
         {
             throw new InvalidCredentialsException();

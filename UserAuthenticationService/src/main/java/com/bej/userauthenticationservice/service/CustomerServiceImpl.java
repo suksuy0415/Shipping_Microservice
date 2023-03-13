@@ -2,7 +2,7 @@ package com.bej.userauthenticationservice.service;
 
 
 import com.bej.userauthenticationservice.domain.Customer;
-import com.bej.userauthenticationservice.exception.UserAlreadyExistsException;
+import com.bej.userauthenticationservice.exception.CustomerAlreadyExistsException;
 import com.bej.userauthenticationservice.repository.CustomerRepository;
 import com.bej.userauthenticationservice.exception.InvalidCredentialsException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ private CustomerRepository userRepository;
         this.userRepository = userRepository;
     }
     @Override
-    public Customer saveCustomer(Customer user) throws UserAlreadyExistsException {
+    public Customer saveCustomer(Customer user) throws CustomerAlreadyExistsException {
         if(userRepository.findById(user.getCustomerId()).isPresent())
         {
-            throw new UserAlreadyExistsException();
+            throw new CustomerAlreadyExistsException();
         }
         System.out.println(user);
         return userRepository.save(user);
     }
 
     @Override
-    public Customer findCustomerByCustomerIdAndPassword(int customerId, String password) throws InvalidCredentialsException {
-        System.out.println("email"+customerId);
+    public Customer findCustomerByCustomerIdAndPassword(String customerId, String password) throws InvalidCredentialsException {
+        System.out.println("customerId"+customerId);
         System.out.println("password"+password);
         Customer loggedInUser = userRepository.findCustomerByCustomerIdAndPassword(customerId,password);
         System.out.println(loggedInUser);

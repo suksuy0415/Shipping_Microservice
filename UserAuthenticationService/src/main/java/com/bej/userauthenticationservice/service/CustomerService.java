@@ -2,14 +2,14 @@ package com.bej.userauthenticationservice.service;
 
 
 import com.bej.userauthenticationservice.domain.Customer;
-import com.bej.userauthenticationservice.exception.UserAlreadyExistsException;
+import com.bej.userauthenticationservice.exception.CustomerAlreadyExistsException;
 import com.bej.userauthenticationservice.exception.InvalidCredentialsException;
 
 public interface CustomerService {
 
-    Customer saveCustomer(Customer user) throws UserAlreadyExistsException;
+    Customer saveCustomer(Customer user) throws CustomerAlreadyExistsException;
     //user name and pwd is in db ot not, if not save
-    Customer findCustomerByCustomerIdAndPassword(int customerId, String password) throws InvalidCredentialsException;
+    Customer findCustomerByCustomerIdAndPassword(String customerId, String password) throws InvalidCredentialsException;
 
 
 

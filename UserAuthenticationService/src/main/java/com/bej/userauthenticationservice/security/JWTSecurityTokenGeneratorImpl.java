@@ -14,8 +14,8 @@ import java.util.Map;
 public class JWTSecurityTokenGeneratorImpl implements SecurityTokenGenerator {
     public String createToken(Customer user){
         Map<String, Object> claims = new HashMap<>();
-        claims.put("email", user.getEmail());
-        return generateToken(claims,user.getEmail());
+        claims.put("CustomerId", user.getCustomerId());
+        return generateToken(claims,user.getCustomerId());
     }
 
     public String generateToken(Map<String,Object> claims,String subject) {
